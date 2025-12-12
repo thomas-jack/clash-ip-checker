@@ -1,0 +1,31 @@
+# Clash Automator Configuration
+
+# API URL for Clash External Controller (Default: http://127.0.0.1:9097)
+clash_api_url: "http://127.0.0.1:9097"
+
+# API Secret (Leave empty if none)
+clash_api_secret: ""
+
+# Path to your Clash Configuration YAML file
+# Example: "C:/Users/YourName/.config/clash/config.yaml"
+# You can use absolute paths.
+yaml_path: ""
+
+# Selector to switch (Default: "GLOBAL")
+# Usually "GLOBAL" or "Proxy"
+selector_name: "GLOBAL"
+
+# Keywords to skip (Nodes containing these will be ignored)
+skip_keywords:
+  - "剩余"
+  - "到期"
+  - "有效期"
+  - "官网"
+  - "网址"
+  - "更新"
+  - "公告"
+  - "重置"
+
+# Other Settings
+headless: false  # Set to true to hide browser window
+output_suffix: "_checked"
