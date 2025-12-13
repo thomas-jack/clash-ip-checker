@@ -5,7 +5,7 @@
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-一个针对 **Clash Verge** (及兼容核心) 的智能自动化工具。它会自动遍历你的代理节点，通过 [IPPure](https://ippure.com/) 检测 IP 纯净度和风险值，并重命名节点，添加实用的指标（Bot 分数、IP 风险、原生/广播状态）。
+一个针对 **Clash Verge** (及兼容核心) 的智能自动化工具。它会自动遍历你的代理节点，通过 [IPPure](https://ippure.com/) 检测 IP 纯净度和风险值，并重命名节点，添加实用的指标（IP 纯净度、Bot 比例、IP属性/IP来源状态）`【🟢🟡 住宅|原生】`。
 
 ![图片描述](assets/clash-node-checked.png)
 
@@ -37,10 +37,11 @@
     ```bash
     pip install -r requirements.txt
     playwright install chromium
+    #如果install chromium运行失败说明playwright没添加环境变量 可以用 python -m playwright install chromium
     ```
 
 3.  **配置文件**
-    - 复制 `config.yaml.example` 并重命名为 `config.yaml`。
+    - 复制 `config.yaml.example` **删除掉.example 并重命名为 `config.yaml`**。
     - 编辑 `config.yaml` 填入你的信息（具体见下面使用方法）：
         - `yaml_path`: 你的 Clash 配置文件 (**.yaml**) 的绝对路径。
         - `clash_api_secret`: 你的 API 密钥 (如果有的话)。
@@ -48,25 +49,25 @@
 ## 🚀 使用方法
 
 1.  打开你的 Clash 客户端 (例如 Clash Verge) 将当前clash正在运行的订阅配置文件切换为你想要测试的订阅配置文件， 然后获取该配置文件的yaml文件绝对路径, 在config.yaml中配置yaml_path。
-    获取订阅配置的yaml文件
+    右键配置文件选择打开文件
     ![](assets/clash-open-yaml.png)
     通过vscode获取path
     ![](assets/clash-open-yaml-vscode.png)
     通过记事本获取path, 鼠标悬停展示但无法复制，需要在对应的文件夹中找到再复制
     ![](assets/clash-open-yaml-jsb.png)
 
-2.  确保 **External Controller** (外部控制) 已在设置中开启，并在config.yaml中配置clash_api_url与clash_api_secret与之对应。
+1.  确保 **External Controller** (外部控制) 已在设置中开启，并在config.yaml中配置clash_api_url与clash_api_secret与之对应。密码随便设置
     ![alt text](assets/clash-controller.png)
-3.  运行脚本:
+2.  运行脚本:
     ```bash
     python clash_automator.py
     ```
-4.  脚本将会:
+3.  脚本将会:
     - 连接到 Clash API。
     - 切换到 "Global" (全局) 模式。
-    - 逐个测试代理节点。
+    - 逐个测试代理节点, 访问ippure获取ip信息。
     - 生成一个名为 `your_config_checked.yaml` 的新文件。
-5.  在项目当前文件夹下将生成的 `_checked.yaml` 文件导入 Clash 即可切换该配置查看结果！
+4.  在项目当前文件夹下将生成的 `_checked.yaml` 文件导入 Clash 即可切换该配置查看结果！
     导入_checked.yaml配置
     ![](assets/clash-import.png)
 
@@ -76,23 +77,23 @@
 
 ### 🔍 结果解读
 
-格式： `【�🔴 属性|来源】`
+格式： `【🟢🟡 属性|来源】`
 
 *   **第 1 个 Emoji (🟢)**: **IP 纯净度** (值越低越好，越低越像真实用户)
-*   **第 2 个 Emoji (🟡)**: **Bot 分数** (值越低越不容易被反爬)
+*   **第 2 个 Emoji (🟡)**: **Bot 比例** (值越低越不容易被反爬，越高来自机器人的流量更大更容易弹验证)
 *   **属性**: 机房、住宅 
 *   **来源**: 原生、广播
 
 #### 📊 评分对照表
 
-| 范围 | Emoji | 含义 | 建议 |
-| :--- | :---: | :--- | :--- |
-| **0 - 10%** | ⚪ | **极佳** | 极其纯净，适合所有用途 |
-| **11 - 30%** | 🟢 | **优秀** | 甚至适合严格的风控场景 |
-| **31 - 50%** | 🟡 | **良好** | 正常浏览网页，多数服务可用 |
-| **51 - 70%** | 🟠 | **中等** | 可能在从严网站遇阻 |
-| **71 - 90%** | 🔴 | **差** | 黑名单常客，验证码多 |
-| **> 90%** | ⚫ | **极差** | 基本无法访问高防网站 |
+| 范围 | Emoji | 含义 |
+| :--- | :---: | :--- |
+| **0 - 10%** | ⚪ | **极佳** |
+| **11 - 30%** | 🟢 | **优秀** |
+| **31 - 50%** | 🟡 | **良好** |
+| **51 - 70%** | 🟠 | **中等** |
+| **71 - 90%** | 🔴 | **差** |
+| **> 90%** | ⚫ | **极差** |
 
 #### 🏷️ 常见标签说明
 
