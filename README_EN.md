@@ -43,6 +43,7 @@ An intelligent automation tool for **Clash Verge** (and compatible cores) that a
     - Duplicate `config.yaml.example` and rename it to `config.yaml`.
     - Edit `config.yaml` and fill in your details:
         - `yaml_path`: The absolute path to your current Clash configuration file.
+          > **Windows Tip**: Use single quotes `'` around the path (e.g., `'C:\Users\...'`) to avoid having to double-escape backslashes.
         - `clash_api_secret`: Your API key (if any).
 
 ## 🚀 Usage

@@ -9,9 +9,9 @@ clash_api_secret: ""
 
 # 2. Files
 # Full absolute path to your Clash Profile YAML
-# Windows Example: "C:\\Users\\YOUR_NAME\\AppData\\Roaming\\io.github.clash-verge-rev.clash-verge-rev\\profiles\\your_profile.yaml"
-# Mac/Linux Example: "/Users/yourname/.config/clash/config.yaml"
-yaml_path: ""
+# Tip: On Windows, use single quotes (' ') to avoid escaping backslashes.
+# Example: 'C:\Users\YourName\AppData\Roaming\clash\config.yaml'
+yaml_path: ''
 
 # Output file suffix (e.g., config_checked.yaml)
 output_suffix: "_checked"
